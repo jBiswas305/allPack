@@ -1,0 +1,78 @@
+
+.grid {
+    overflow: hidden;
+
+    /* box width and height */
+    --grid__col-width: 353px;
+    --grid__col-height: 199px;
+    --grid__column-gap: 9px;
+    --grid__row-gap: 9px;
+
+    max-width: 100%;
+    padding: 9px;
+    margin: 0 auto;
+}
+
+.grid__outer-grid {
+    display: grid;
+    margin: 0 calc(var(--grid__column-gap) * -1);
+
+    column-gap: var(--grid__column-gap);
+    row-gap: var(--grid__row-gap);
+
+    --grid__column-gap-double: calc(var(--grid__column-gap) * 2);
+    --grid__column-gap-half: calc(var(--grid__column-gap) / 2);
+    --grid__row-gap-half: calc(var(--grid__row-gap) / 2);
+    --grid__inner-grid: repeat(auto-fit, minmax(min(var(--grid__col-width), calc(100% - var(--grid__column-gap-double))), var(--grid__col-width)));
+    grid-template-columns: minmax(0, 1fr) [grid-start] var(--grid__inner-grid) [grid-end] minmax(0, 1fr);
+}
+
+.grid__inner-grid {
+    display: grid;
+
+    grid-column-start: grid-start;
+    grid-column-end: grid-end;
+
+    column-gap: var(--grid__column-gap);
+    row-gap: var(--grid__row-gap);
+
+    grid-template-columns: var(--grid__inner-grid);
+}
+
+.box {
+    background: rgb(255, 255, 255);
+    height: auto;
+
+    border-radius: 20px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: 0 0 11px -7px rgb(51, 51, 51);
+    transition: .3s;
+}
+
+.box:hover {
+    box-shadow: 0 0 17px -7px rgb(51, 51, 51);
+}
+
+.box_img {
+    height: var(--grid__col-height);
+    border-radius: 16px;
+    object-fit: cover;
+    vertical-align: middle;
+    transform-origin: bottom;
+    z-index: 9;
+    transition: .3s;
+}
+
+.box:hover .box_img {
+    transform: scale(1.1);
+}
+
+input {
+    margin: 3px 0;
+}
